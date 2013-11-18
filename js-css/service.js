@@ -13,28 +13,6 @@ function getY(z3D, y3D) {
     return Y0 - (z3D - Math.round(y3D * Math.sin(45))) * SCALE
 }
 
-/** Инициализация слайдеров (III-октант) */
-function initSliders() {
-    $('#sliderX').slider({
-        range: 'max', min: 0, max: 10, value: 0,
-        change: function(event, ui) {
-            changeSlider();
-        }
-    });
-    $('#sliderY').slider({
-        range: 'max', min: -10, max: 0, value: 0,
-        change: function(event, ui) {
-            changeSlider();
-        }
-    });
-    $('#sliderZ').slider({
-        range: 'max', min: -10, max: 0, value: 0,
-        change: function(event, ui) {
-            changeSlider();
-        }
-    });
-}
-
 /** Рисование линии */
 function drawLineXY(x1, y1, x2, y2) {
     ctx.beginPath();
@@ -55,7 +33,7 @@ function drawCircle(x, y, radius) {
     ctx.fill();
 }
 /** Рисование точки */
-function drawPoint(point) {
+function drawPoint(point) { //TODO встроить вывод текста
     drawCircle(point.x, point.y, 5);
 }
 /** Рисование текста */
