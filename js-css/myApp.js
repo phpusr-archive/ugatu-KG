@@ -7,8 +7,6 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     //Канва
     ctx = document.getElementById("myCanvas").getContext("2d");
 
-    var pX = 0, pY = 0;
-
     function changeSlider() {
         clearCanvas();
 
@@ -16,24 +14,21 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         var valY = $('#sliderY').slider('value');
         var valZ = $('#sliderZ').slider('value');
 
-        pX = getX(valX, valY);
-        pY = getY(valZ, valY);
-        console.log('pX=', pX, 'pY=', pY);
+        var point = new Point(valX, valY, valZ);
+        logPoint(point, 'point');
 
         //Проекция точки A
-        var a1x = getX(valX, valY);
-        var a1y = getX(0, valY);
-        console.log('a1x=', a1x, 'a1y=', a1y);
+        var a1 = new Point(valY, valY, 0);
+        logPoint(a1, 'a1');
 
-        var a2x = getX(0, valY);
-        var a2y = getX(valZ, valY);
-        console.log('a2x=', a2x, 'a2y=', a2y);
+        var a2 = new Point(0, valY, valZ);
+        logPoint(a2, 'a2');
 
-        drawPoint(a1x, a1y);
-        drawText('A1', a1x, a1y);
-        drawPoint(a2x, a2y);
-        drawText('A2', a2x, a2y);
-        drawLine(a1x, a1y, a2x, a2y);
+        drawPoint(a1);
+        drawText('A1', a1);
+        drawPoint(a2);
+        drawText('A2', a2);
+        drawLine(a1, a2);
 
 
         $scope.valX = valX;
@@ -44,7 +39,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         }
 
 
-        drawPoint(pX, pY);
+        drawPoint(point);
     }
 
     //Start
