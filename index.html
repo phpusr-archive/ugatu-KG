@@ -1,5 +1,11 @@
 <html ng-app="myApp">
 <head>
+
+    <!--TODO скачать-->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
     <script type="text/javascript" src="lib/angular/angular.js"></script>
     <script type="text/javascript" src="lib/angular/angular-sanitize.js"></script>
     <script type="text/javascript" src="js-css/myApp.js"></script>
@@ -14,10 +20,14 @@
 </head>
 <body ng-controller="MyCtrl">
 
-    <div style="width: 500px; margin: 0 auto;">
+    <div style="width: 500px; margin: 0 auto;"> <!--TODO установка ширины в одном месте-->
         <canvas style="border: 1px solid #c6c6c6" id="myCanvas" width="500" height="500">
             <!-- Insert fallback content here -->
         </canvas>
+
+        X = {{valX}} : <div id="sliderX" class="slider" ng-mouseup="changeSlider()"></div>
+        Y = {{valY}} : <div id="sliderY" class="slider" ng-mouseup="changeSlider()"></div>
+        Z = {{valZ}} : <div id="sliderZ" class="slider" ng-mouseup="changeSlider()"></div>
     </div>
 
 </body>
