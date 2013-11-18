@@ -1,0 +1,65 @@
+<html>
+<body>  
+    <canvas onclick="getCoords(event)" style="border: 1px solid #c6c6c6" id="myCanvas" width="500" height="500">
+          <!-- Insert fallback content here -->  
+    </canvas>  
+    <script>  
+
+    var coords = [];
+    var perps = [];
+
+    var ctx = document.getElementById("myCanvas").getContext("2d");
+
+        function getCoords(e)
+        {
+            //alert(e.clientX + " на " + e.clientY);
+
+            drawCircle(e.clientX, e.clientY, 3);
+                
+            coords.push(e.clientX, e.clientY);
+
+            if (coords.length === 4) {
+                x1 = coords[0]; y1 = coords[2];
+                x2 = coords[1]; y2 = coords[3];
+
+                var perpX = (x1 + y1)/2;
+                var perpY = (x2 + y2)/2;
+
+                drawCircle(perpX, perpY, 3);
+
+                //drawLine(perpX, perpY, perpX+200, perpY+200);
+                drawLine(coords[0], coords[1], coords[2], coords[3]);
+                coords = [];
+
+            }
+        }
+
+
+    function drawLine(x_first, y_first, x_second, y_second) 
+    {
+        ctx.beginPath();   
+        ctx.moveTo( x_first, y_first );
+        ctx.lineTo( x_second, y_second );
+        ctx.lineWidth = 2; 
+        ctx.stroke();
+    }
+
+    function drawCircle(x, y, radius) 
+    {
+        ctx.beginPath();  
+        ctx.arc(x, y, radius, 0, Math.PI*2, false);  
+        ctx.closePath();  
+        ctx.fill();  
+    }
+
+    $(document).ready(function() 
+    {  
+        //drawLine(100, 100, 250, 300);
+         //var canvas = document.getElementById("myCanvas");  
+         //var ctx = canvas.getContext("2d");  
+         //...
+    });  
+
+   </script>  
+   </body>
+</html>
