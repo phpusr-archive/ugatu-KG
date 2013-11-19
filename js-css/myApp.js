@@ -11,30 +11,30 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     function initSliders() {
         $('#sliderX').slider({
             range: 'max', min: 0, max: 10, value: 0,
-            change: function(event, ui) {
-                changeSlider();
+            slide: function(event, ui) {
+                changeSlider(ui.value, null, null);
             }
         });
         $('#sliderY').slider({
             range: 'max', min: -10, max: 0, value: 0,
-            change: function(event, ui) {
-                changeSlider();
+            slide: function(event, ui) {
+                changeSlider(null, ui.value, null);
             }
         });
         $('#sliderZ').slider({
             range: 'max', min: -10, max: 0, value: 0,
-            change: function(event, ui) {
-                changeSlider();
+            slide: function(event, ui) {
+                changeSlider(null, null, ui.value);
             }
         });
     }
 
-    function changeSlider() {
+    function changeSlider(valX, valY ,valZ) {
         clearCanvas();
 
-        var valX = $('#sliderX').slider('value');
-        var valY = $('#sliderY').slider('value');
-        var valZ = $('#sliderZ').slider('value');
+        valX = valX != null ? valX : $('#sliderX').slider('value');
+        valY = valY != null ? valY : $('#sliderY').slider('value');
+        valZ = valZ != null ? valZ : $('#sliderZ').slider('value');
 
         var p = new Point(valX, valY, valZ);
         logPoint(p, 'p');
