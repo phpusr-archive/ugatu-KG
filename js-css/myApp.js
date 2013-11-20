@@ -7,6 +7,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     $scope.notSupport = 'Браузер не поддерживает Canvas';
     //Канва
     ctx = document.getElementById("canvasDimensional").getContext("2d");
+    drawing1 = new Drawing(ctx);
 
     /** Инициализация слайдеров (III-октант) */
     function initSliders() {
@@ -31,7 +32,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     }
 
     function changeSlider(valX, valY ,valZ) {
-        clearCanvas();
+        clearCanvas(drawing1);
 
         valX = valX != null ? valX : $('#sliderX').slider('value');
         valY = valY != null ? valY : $('#sliderY').slider('value');
