@@ -6,8 +6,11 @@ var app = angular.module('myApp', ['ngSanitize']);
 app.controller('MyCtrl', function MyCtrl($scope) {
     $scope.notSupport = 'Браузер не поддерживает Canvas';
     //Канва
-    ctx = document.getElementById("canvasDimensional").getContext("2d");
-    var drwDim = new Drawing(ctx);
+    var cnvDim = document.getElementById("canvasDimensional").getContext("2d");
+    var cnvCmplx = document.getElementById("canvasComplex").getContext("2d");
+
+    var drwDim = new Drawing(cnvDim);
+    var drwCmplx = new Drawing(cnvCmplx);
 
     /** Инициализация слайдеров (III-октант) */
     function initSliders() {
@@ -61,6 +64,9 @@ app.controller('MyCtrl', function MyCtrl($scope) {
 
         //Отображение значений ползунков
         angularApply($scope);
+
+        //TODO продолжить
+        drwCmplx.createPoint(3, 4, 5).drawPoint('Test');
     }
 
     //Start

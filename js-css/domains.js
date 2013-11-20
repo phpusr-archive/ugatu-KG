@@ -29,7 +29,7 @@ function Point(drawing, x, y) {
 }
 
 /**
- * Класс: Canvas
+ * Класс: Drawing
  */
 function Drawing(canvas) {
     var alpha = 45;
