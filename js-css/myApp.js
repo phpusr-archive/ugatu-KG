@@ -37,29 +37,25 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         valZ = valZ != null ? valZ : $('#sliderZ').slider('value');
 
         //Соединяющие точки
-        var aXY = new Point(0, 0, valZ).drawPoint();
-        var aXZ = new Point(0, valY, 0).drawPoint();
-        var aYZ = new Point(valX, 0, 0).drawPoint();
+        var pointAxy = new Point(0, 0, valZ).drawPoint();
+        var pointAxz = new Point(0, valY, 0).drawPoint();
+        var pointAyz = new Point(valX, 0, 0).drawPoint();
 
         //Проекция точки A
-        var aX = new Point(0, valY, valZ).drawPoint('Ax');
-        var aY = new Point(valX, 0, valZ).drawPoint('Ay');
-        var aZ = new Point(valX, valY, 0).drawPoint('Az');
-        aXY.drawLine(aX).drawLine(aY);
-        aXZ.drawLine(aX).drawLine(aZ);
-        aYZ.drawLine(aY).drawLine(aZ);
+        var pointAx = new Point(0, valY, valZ).drawPoint('Ax');
+        var pointAy = new Point(valX, 0, valZ).drawPoint('Ay');
+        var pointAz = new Point(valX, valY, 0).drawPoint('Az');
+        pointAxy.drawLine(pointAx).drawLine(pointAy);
+        pointAxz.drawLine(pointAx).drawLine(pointAz);
+        pointAyz.drawLine(pointAy).drawLine(pointAz);
 
         //Точка A
-        var a = new Point(valX, valY, valZ).drawPoint('A');
-        a.drawLine(aZ).drawLine(aX).drawLine(aY);
+        var pointA = new Point(valX, valY, valZ).drawPoint('A');
+        pointA.drawLine(pointAz).drawLine(pointAx).drawLine(pointAy);
 
         $scope.valX = valX;
         $scope.valY = valY;
         $scope.valZ = valZ;
-        if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
-            $scope.$apply();
-        }
-
     }
 
     //Start
