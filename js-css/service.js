@@ -21,10 +21,6 @@ function drawLineXY(x1, y1, x2, y2) {
     ctx.lineWidth = 2;
     ctx.stroke();
 }
-/** TODO */
-function drawLine(point1, point2) {
-    drawLineXY(point1.x, point1.y, point2.x, point2.y);
-}
 /** Рисование окружности */
 function drawCircle(x, y, radius) {
     ctx.beginPath();
@@ -32,27 +28,21 @@ function drawCircle(x, y, radius) {
     ctx.closePath();
     ctx.fill();
 }
-/** Рисование точки */
-function drawPoint(point) { //TODO встроить вывод текста
-    drawCircle(point.x, point.y, 5);
-}
 /** Рисование текста */
 function drawTextXY(text, x, y) {
     ctx.fillStyle = "#00F"; //TODO подумать над цветом заливки
     ctx.font = "normal 15pt Arial";
     ctx.fillText(text, x, y);
 }
-/** TODO */
-function drawText(text, point) {
-    drawTextXY(text, point.x, point.y);
-}
 /** Очистка канвы */
 function clearCanvas() {
     ctx.clearRect(MIN_X, MIN_Y, MAX_X, MAX_Y);
 
     //Рисование осей
-    drawLineXY(MIN_X, MIN_Y, MAX_X, MAX_Y);
-    drawLineXY(X0, MIN_Y, X0, MAX_Y);
+    var y1 = new Point(0, -100, 0);
+    var y2 = new Point(0, 100, 0);
+    y1.drawLine(y2);
+    drawLineXY(X0, MIN_Y, X0, MAX_Y); //TODO возможно стоит все координаты переделать в 3D
     drawLineXY(MIN_X, Y0, MAX_X, Y0);
 
     //Заголовки осей

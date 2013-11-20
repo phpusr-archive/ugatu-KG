@@ -10,19 +10,19 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     /** Инициализация слайдеров (III-октант) */
     function initSliders() {
         $('#sliderX').slider({
-            range: 'max', min: 0, max: 10, value: 0,
+            range: 'max', min: -10, max: 10, value: 0,
             slide: function(event, ui) {
                 changeSlider(ui.value, null, null);
             }
         });
         $('#sliderY').slider({
-            range: 'max', min: -10, max: 0, value: 0,
+            range: 'max', min: -10, max: 10, value: 0,
             slide: function(event, ui) {
                 changeSlider(null, ui.value, null);
             }
         });
         $('#sliderZ').slider({
-            range: 'max', min: -10, max: 0, value: 0,
+            range: 'max', min: -10, max: 10, value: 0,
             slide: function(event, ui) {
                 changeSlider(null, null, ui.value);
             }
@@ -37,32 +37,19 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         valZ = valZ != null ? valZ : $('#sliderZ').slider('value');
 
         var p = new Point(valX, valY, valZ);
-        logPoint(p, 'p');
 
         //Проекция точки A
-        var a1 = new Point(valY, valY, 0);
-        logPoint(a1, 'a1');
+        var aX = new Point(0, valY, valZ);
+        var aY = new Point(valX, 0, valZ);
+        var aZ = new Point(valX, valY, 0);
 
-        var a2 = new Point(0, valY, valZ);
-        logPoint(a2, 'a2');
+        aX.drawPoint('Ax');
+        aY.drawPoint('Ay');
+        aZ.drawPoint('Az');
 
-        var a3 = new Point(valX, 0, valZ);
-        logPoint(a3, 'a3');
-
-        drawPoint(a1);
-        drawText('A1', a1);
-        drawPoint(a2);
-        drawText('A2', a2);
-        drawPoint(a3);
-        drawText('A3', a3);
-
-        /*drawLine(a1, a2);
-        drawLine(a1, a3);
-        drawLine(a2, a3);*/
-
-        drawLine(p, a1);
-        drawLine(p, a2);
-        drawLine(p, a3);
+        p.drawLine(aZ);
+        p.drawLine(aX);
+        p.drawLine(aY);
 
 
         $scope.valX = valX;
@@ -73,7 +60,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         }
 
 
-        drawPoint(p);
+        p.drawPoint('P');
     }
 
     //Start
