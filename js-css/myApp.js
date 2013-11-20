@@ -10,19 +10,19 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     /** Инициализация слайдеров (III-октант) */
     function initSliders() {
         $('#sliderX').slider({
-            range: 'max', min: -10, max: 10, value: 0,
+            range: 'max', min: -10, max: 10, value: -7,
             slide: function(event, ui) {
                 changeSlider(ui.value, null, null);
             }
         });
         $('#sliderY').slider({
-            range: 'max', min: -10, max: 10, value: 0,
+            range: 'max', min: -10, max: 10, value: -5,
             slide: function(event, ui) {
                 changeSlider(null, ui.value, null);
             }
         });
         $('#sliderZ').slider({
-            range: 'max', min: -10, max: 10, value: 0,
+            range: 'max', min: -10, max: 10, value: -6,
             slide: function(event, ui) {
                 changeSlider(null, null, ui.value);
             }
@@ -36,21 +36,22 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         valY = valY != null ? valY : $('#sliderY').slider('value');
         valZ = valZ != null ? valZ : $('#sliderZ').slider('value');
 
-        var p = new Point(valX, valY, valZ);
+        //Соединяющие точки
+        var aXY = new Point(0, 0, valZ).drawPoint();
+        var aXZ = new Point(0, valY, 0).drawPoint();
+        var aYZ = new Point(valX, 0, 0).drawPoint();
 
         //Проекция точки A
-        var aX = new Point(0, valY, valZ);
-        var aY = new Point(valX, 0, valZ);
-        var aZ = new Point(valX, valY, 0);
+        var aX = new Point(0, valY, valZ).drawPoint('Ax');
+        var aY = new Point(valX, 0, valZ).drawPoint('Ay');
+        var aZ = new Point(valX, valY, 0).drawPoint('Az');
+        aXY.drawLine(aX).drawLine(aY);
+        aXZ.drawLine(aX).drawLine(aZ);
+        aYZ.drawLine(aY).drawLine(aZ);
 
-        aX.drawPoint('Ax');
-        aY.drawPoint('Ay');
-        aZ.drawPoint('Az');
-
-        p.drawLine(aZ);
-        p.drawLine(aX);
-        p.drawLine(aY);
-
+        //Точка A
+        var a = new Point(valX, valY, valZ).drawPoint('A');
+        a.drawLine(aZ).drawLine(aX).drawLine(aY);
 
         $scope.valX = valX;
         $scope.valY = valY;
@@ -59,8 +60,6 @@ app.controller('MyCtrl', function MyCtrl($scope) {
             $scope.$apply();
         }
 
-
-        p.drawPoint('P');
     }
 
     //Start

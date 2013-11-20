@@ -22,13 +22,19 @@ function Point(x3D, y3D, z3D) {
     this.drawPoint = function(pointName) {
         drawCircle(this.x, this.y, 5);
         if (pointName) this.drawText(pointName);
+
+        return this;
     };
     /** Рисование текста */
     this.drawText = function (text) {
         drawTextXY(text, this.x, this.y);
+
+        return this;
     };
     /** Рисование линии */
     this.drawLine = function (pointTo) {
         drawLineXY(this.x, this.y, pointTo.x, pointTo.y);
+
+        return this;
     };
 }
