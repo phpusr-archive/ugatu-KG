@@ -24,14 +24,19 @@
 </head>
 <body ng-controller="MyCtrl">
 
-    <div style="width: 500px; margin: 20px auto;"> <!--TODO установка ширины в одном месте-->
-        <canvas style="border: 1px solid #c6c6c6" id="myCanvas" width="500" height="500">
-            <!-- Insert fallback content here -->
-        </canvas>
+    <div style="width: 1050px; margin: 20px auto;"> <!--TODO установка ширины в одном месте-->
+        <div style="float: left;">
+            <canvas style="border: 1px solid #c6c6c6" id="canvasDimensional" width="500" height="500">{{notSupport}}</canvas>
+        </div>
+        <div style="float: right;">
+            <canvas style="border: 1px solid #c6c6c6" id="canvasComplex" width="500" height="500">{{notSupport}}</canvas>
+        </div>
 
-        X = {{valX}} : <div id="sliderX" class="slider"></div>
-        Y = {{valY}} : <div id="sliderY" class="slider"></div>
-        Z = {{valZ}} : <div id="sliderZ" class="slider"></div>
+        <div style="width: 500px; margin: 0 auto; padding-top: 15px; clear: left;">
+            X = {{valX}} : <div id="sliderX" class="slider"></div>
+            Y = {{valY}} : <div id="sliderY" class="slider"></div>
+            Z = {{valZ}} : <div id="sliderZ" class="slider"></div>
+        </div>
     </div>
 
 </body>

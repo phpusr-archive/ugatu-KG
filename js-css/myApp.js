@@ -4,8 +4,9 @@
 
 var app = angular.module('myApp', ['ngSanitize']);
 app.controller('MyCtrl', function MyCtrl($scope) {
+    $scope.notSupport = 'Браузер не поддерживает Canvas';
     //Канва
-    ctx = document.getElementById("myCanvas").getContext("2d");
+    ctx = document.getElementById("canvasDimensional").getContext("2d");
 
     /** Инициализация слайдеров (III-октант) */
     function initSliders() {
