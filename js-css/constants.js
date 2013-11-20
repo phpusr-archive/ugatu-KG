@@ -2,7 +2,6 @@
 
 //Канва
 var ctx; //TODO remove
-var drawing1, drawing2; //TODO rename
 
 var MAX_X = 500, MAX_Y = MAX_X;
 var MIN_X = 0, MIN_Y = MIN_X;

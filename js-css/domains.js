@@ -3,11 +3,44 @@
 /**
  * Класс: Точка
  */
-function Point(x3D, y3D, z3D) {
+function Point(drawing, x, y) {
+    this.x = x;
+    this.y = y;
+
+    /** Рисование точки */
+    this.drawPoint = function(pointName) {
+        drawing.drawCircle(this.x, this.y, 5);
+        if (pointName) this.drawText(pointName);
+
+        return this;
+    };
+    /** Рисование текста */
+    this.drawText = function (text) {
+        drawing.drawTextXY(text, this.x, this.y);
+
+        return this;
+    };
+    /** Рисование линии */
+    this.drawLine = function (pointTo) {
+        drawing.drawLineXY(this.x, this.y, pointTo.x, pointTo.y);
+
+        return this;
+    };
+}
+
+/**
+ * Класс: Canvas
+ */
+function Drawing(canvas) {
     var alpha = 45;
 
-    this.x = getX(x3D, y3D);
-    this.y = getY(z3D, y3D);
+    /** Создание точки */
+    this.createPoint = function(x3D, y3D, z3D) {
+        var x = getX(x3D, y3D);
+        var y = getY(z3D, y3D);
+
+        return new Point(this, x, y);
+    };
 
     /** X - координата в 2D */
     function getX(x3D, y3D) {
@@ -22,35 +55,6 @@ function Point(x3D, y3D, z3D) {
         var v2 = Y0 - Math.round((z3D - y3D * Math.sin(alpha)) * SCALE);
 
         return v2;
-    }
-
-    /** Рисование точки */
-    this.drawPoint = function(pointName) {
-        drawing1.drawCircle(this.x, this.y, 5); //TODO
-        if (pointName) this.drawText(pointName);
-
-        return this;
-    };
-    /** Рисование текста */
-    this.drawText = function (text) {
-        drawing1.drawTextXY(text, this.x, this.y); //TODO
-
-        return this;
-    };
-    /** Рисование линии */
-    this.drawLine = function (pointTo) {
-        drawing1.drawLineXY(this.x, this.y, pointTo.x, pointTo.y); //TODO
-
-        return this;
-    };
-}
-
-/**
- * Класс: Canvas
- */
-function Drawing(canvas) {
-    function addPoint() {
-        //TODO
     }
 
     /** Рисование текста */

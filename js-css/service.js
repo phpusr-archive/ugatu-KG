@@ -5,26 +5,26 @@
  */
 
 /** Очистка канвы */
-function clearCanvas(drawing) {
-    drawing.clearCanvas();
+function clearCanvas(drw) {
+    drw.clearCanvas();
 
     //Рисование осей
-    var y1 = new Point(0, -100, 0);
-    var y2 = new Point(0, 100, 0);
+    var y1 = drw.createPoint(0, -100, 0);
+    var y2 = drw.createPoint(0, 100, 0);
     y1.drawLine(y2);
-    drawing.drawLineXY(X0, MIN_Y, X0, MAX_Y); //TODO возможно стоит все координаты переделать в 3D
-    drawing.drawLineXY(MIN_X, Y0, MAX_X, Y0);
+    drw.drawLineXY(X0, MIN_Y, X0, MAX_Y); //TODO возможно стоит все координаты переделать в 3D
+    drw.drawLineXY(MIN_X, Y0, MAX_X, Y0);
 
     //Заголовки осей
     var size = 20;
-    drawing.drawTextXY('X', MIN_X, Y0);
-    drawing.drawTextXY('-X', MAX_X-size, Y0);
+    drw.drawTextXY('X', MIN_X, Y0);
+    drw.drawTextXY('-X', MAX_X-size, Y0);
 
-    drawing.drawTextXY('Z', X0, MIN_Y+size);
-    drawing.drawTextXY('-Z', X0, MAX_Y);
+    drw.drawTextXY('Z', X0, MIN_Y+size);
+    drw.drawTextXY('-Z', X0, MAX_Y);
 
-    drawing.drawTextXY('Y', MAX_X-size, MAX_Y-size);
-    drawing.drawTextXY('-Y', MIN_X+size, MIN_Y+size);
+    drw.drawTextXY('Y', MAX_X-size, MAX_Y-size);
+    drw.drawTextXY('-Y', MIN_X+size, MIN_Y+size);
 }
 
 /** Логирование координат Точки */

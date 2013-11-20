@@ -7,7 +7,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     $scope.notSupport = 'Браузер не поддерживает Canvas';
     //Канва
     ctx = document.getElementById("canvasDimensional").getContext("2d");
-    drawing1 = new Drawing(ctx);
+    var drwDim = new Drawing(ctx);
 
     /** Инициализация слайдеров (III-октант) */
     function initSliders() {
@@ -32,27 +32,27 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     }
 
     function changeSlider(valX, valY ,valZ) {
-        clearCanvas(drawing1);
+        clearCanvas(drwDim);
 
         valX = valX != null ? valX : $('#sliderX').slider('value');
         valY = valY != null ? valY : $('#sliderY').slider('value');
         valZ = valZ != null ? valZ : $('#sliderZ').slider('value');
 
         //Соединяющие точки
-        var pointAxy = new Point(0, 0, valZ).drawPoint();
-        var pointAxz = new Point(0, valY, 0).drawPoint();
-        var pointAyz = new Point(valX, 0, 0).drawPoint();
+        var pointAxy = drwDim.createPoint(0, 0, valZ).drawPoint();
+        var pointAxz = drwDim.createPoint(0, valY, 0).drawPoint();
+        var pointAyz = drwDim.createPoint(valX, 0, 0).drawPoint();
 
         //Проекция точки A
-        var pointAx = new Point(0, valY, valZ).drawPoint('Ax');
-        var pointAy = new Point(valX, 0, valZ).drawPoint('Ay');
-        var pointAz = new Point(valX, valY, 0).drawPoint('Az');
+        var pointAx = drwDim.createPoint(0, valY, valZ).drawPoint('Ax');
+        var pointAy = drwDim.createPoint(valX, 0, valZ).drawPoint('Ay');
+        var pointAz = drwDim.createPoint(valX, valY, 0).drawPoint('Az');
         pointAxy.drawLine(pointAx).drawLine(pointAy);
         pointAxz.drawLine(pointAx).drawLine(pointAz);
         pointAyz.drawLine(pointAy).drawLine(pointAz);
 
         //Точка A
-        var pointA = new Point(valX, valY, valZ).drawPoint('A');
+        var pointA = drwDim.createPoint(valX, valY, valZ).drawPoint('A');
         pointA.drawLine(pointAz).drawLine(pointAx).drawLine(pointAy);
 
         $scope.valX = valX;
