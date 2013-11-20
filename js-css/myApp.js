@@ -57,6 +57,9 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         $scope.valX = valX;
         $scope.valY = valY;
         $scope.valZ = valZ;
+
+        //Отображение значений ползунков
+        angularApply($scope);
     }
 
     //Start

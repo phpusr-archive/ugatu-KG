@@ -11,11 +11,17 @@ function Point(x3D, y3D, z3D) {
 
     /** X - координата в 2D */
     function getX(x3D, y3D) {
-        return X0 - (x3D - Math.round(y3D * Math.cos(alpha))) * SCALE;
+        var v1 = X0 - (x3D - Math.round(y3D * Math.cos(alpha))) * SCALE; //Криво по Y
+        var v2 = X0 - Math.round((x3D - y3D * Math.cos(alpha)) * SCALE); //Нормально по Y
+
+        return v2;
     }
     /** Y - координата в 2D */
     function getY(z3D, y3D) {
-        return Y0 - (z3D - Math.round(y3D * Math.sin(alpha))) * SCALE;
+        var v1 = Y0 - (z3D - Math.round(y3D * Math.sin(alpha))) * SCALE;
+        var v2 = Y0 - Math.round((z3D - y3D * Math.sin(alpha)) * SCALE);
+
+        return v2;
     }
 
     /** Рисование точки */
