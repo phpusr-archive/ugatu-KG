@@ -4,15 +4,6 @@
  * Вторичные функции
  */
 
-/** X - координата в 2D */
-function getX(x3D, y3D) {
-    return X0 - (x3D - Math.round(y3D * Math.cos(45))) * SCALE
-}
-/** Y - координата в 2D */
-function getY(z3D, y3D) {
-    return Y0 - (z3D - Math.round(y3D * Math.sin(45))) * SCALE
-}
-
 /** Рисование линии */
 function drawLineXY(x1, y1, x2, y2) {
     ctx.beginPath();

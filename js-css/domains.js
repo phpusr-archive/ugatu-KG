@@ -3,9 +3,20 @@
 /**
  * Класс: Точка
  */
-function Point(x, y, z) {
-    this.x = getX(x, y);
-    this.y = getY(z, y);
+function Point(x3D, y3D, z3D) {
+    var alpha = 45;
+
+    this.x = getX(x3D, y3D);
+    this.y = getY(z3D, y3D);
+
+    /** X - координата в 2D */
+    function getX(x3D, y3D) {
+        return X0 - (x3D - Math.round(y3D * Math.cos(alpha))) * SCALE;
+    }
+    /** Y - координата в 2D */
+    function getY(z3D, y3D) {
+        return Y0 - (z3D - Math.round(y3D * Math.sin(alpha))) * SCALE;
+    }
 
     /** Рисование точки */
     this.drawPoint = function(pointName) {
