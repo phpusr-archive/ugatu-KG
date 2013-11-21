@@ -42,6 +42,14 @@ function Drawing(canvas) {
         return new Point(this, x, y);
     };
 
+    /** Создание 2D точки */
+    this.createPoint2D = function(x2D, y2D) {
+        var x = getX(x2D, 0);
+        var y = getY(y2D, 0);
+
+        return new Point(this, x, y);
+    };
+
     /** X - координата в 2D */
     function getX(x3D, y3D) {
         var v1 = X0 - (x3D - Math.round(y3D * Math.cos(alpha))) * SCALE; //Криво по Y
