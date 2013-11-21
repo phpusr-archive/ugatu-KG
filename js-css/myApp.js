@@ -57,22 +57,22 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     function drawDimensional(valX, valY ,valZ) {
         clearCanvas(drwDim);
 
-        //Соединяющие точки
-        var pointAxy = drwDim.createPoint(0, 0, valZ).drawPoint();
-        var pointAxz = drwDim.createPoint(0, valY, 0).drawPoint();
-        var pointAyz = drwDim.createPoint(valX, 0, 0).drawPoint();
-
         //Проекция точки A
-        var pointAx = drwDim.createPoint(0, valY, valZ).drawPoint('Ax');
-        var pointAy = drwDim.createPoint(valX, 0, valZ).drawPoint('Ay');
-        var pointAz = drwDim.createPoint(valX, valY, 0).drawPoint('Az');
-        pointAxy.drawLine(pointAx).drawLine(pointAy);
-        pointAxz.drawLine(pointAx).drawLine(pointAz);
-        pointAyz.drawLine(pointAy).drawLine(pointAz);
+        var pointAx = drwDim.createPoint(valX, 0, 0).drawPoint('Ax');
+        var pointAy = drwDim.createPoint(0, valY, 0).drawPoint('Ay');
+        var pointAz = drwDim.createPoint(0, 0, valZ).drawPoint('Az');
+
+        var pointA1 = drwDim.createPoint(valX, valY, 0).drawPoint('A1');
+        var pointA2 = drwDim.createPoint(valX, 0, valZ).drawPoint('A2');
+        var pointA3 = drwDim.createPoint(0, valY, valZ).drawPoint('A3');
+
+        pointAz.drawLine(pointA3).drawLine(pointA2);
+        pointAy.drawLine(pointA3).drawLine(pointA1);
+        pointAx.drawLine(pointA2).drawLine(pointA1);
 
         //Точка A
         var pointA = drwDim.createPoint(valX, valY, valZ).drawPoint('A');
-        pointA.drawLine(pointAz).drawLine(pointAx).drawLine(pointAy);
+        pointA.drawLine(pointA1).drawLine(pointA2).drawLine(pointA3);
     }
 
     /** Построение Комплексного чертежа */
