@@ -9,8 +9,8 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     var cnvDim = document.getElementById("canvasDimensional").getContext("2d");
     var cnvCmplx = document.getElementById("canvasComplex").getContext("2d");
 
-    var drwDim = new Drawing(cnvDim);
-    var drwCmplx = new Drawing(cnvCmplx);
+    var drwDim = new Drawing(cnvDim, 'dim');
+    var drwCmplx = new Drawing(cnvCmplx, 'cmplx');
 
     /** Инициализация слайдеров (III-октант) */
     function initSliders() {
@@ -55,7 +55,8 @@ app.controller('MyCtrl', function MyCtrl($scope) {
 
     /** Построение Пространственного чертежа */
     function drawDimensional(valX, valY ,valZ) {
-        clearCanvas(drwDim, 'dim');
+        //Очистка канвы и построение осей
+        drwDim.drawAxis();
 
         //Проекция точки A
         var pointAx = drwDim.createPoint(valX, 0, 0).drawPoint('Ax');
@@ -77,7 +78,8 @@ app.controller('MyCtrl', function MyCtrl($scope) {
 
     /** Построение Комплексного чертежа */
     function drawComplex(valX, valY ,valZ) {
-        clearCanvas(drwCmplx, 'cmplx');
+        //Очистка канвы и построение осей
+        drwCmplx.drawAxis();
 
         var pointA1 = drwCmplx.createPoint2D(valX, -valY).drawPoint('A1');
         var pointA2 = drwCmplx.createPoint2D(valX, valZ).drawPoint('A2');
