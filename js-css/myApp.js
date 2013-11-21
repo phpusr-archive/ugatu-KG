@@ -17,31 +17,46 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         $('#sliderX').slider({
             range: 'max', min: -10, max: 10, value: -7,
             slide: function(event, ui) {
-                changeSlider(ui.value, null, null);
+                repaintDrawing(ui.value, null, null);
             }
         });
         $('#sliderY').slider({
             range: 'max', min: -10, max: 10, value: -5,
             slide: function(event, ui) {
-                changeSlider(null, ui.value, null);
+                repaintDrawing(null, ui.value, null);
             }
         });
         $('#sliderZ').slider({
             range: 'max', min: -10, max: 10, value: -6,
             slide: function(event, ui) {
-                changeSlider(null, null, ui.value);
+                repaintDrawing(null, null, ui.value);
             }
         });
     }
 
-    function changeSlider(valX, valY ,valZ) {
-        clearCanvas(drwDim);
+    /** Перерисовка чертежей */
+    function repaintDrawing(valX, valY ,valZ) {
 
         valX = valX != null ? valX : $('#sliderX').slider('value');
         valY = valY != null ? valY : $('#sliderY').slider('value');
         valZ = valZ != null ? valZ : $('#sliderZ').slider('value');
 
-        //TODO вынести рисование пространственного чертежа
+        //Отображение значений ползунков
+        $scope.valX = valX;
+        $scope.valY = valY;
+        $scope.valZ = valZ;
+        angularApply($scope);
+
+        //Построение Пространственного чертежа
+        drawDimensional(valX, valY, valZ);
+        //Построение Комплексного чертежа
+        drawComplex(valX, valY, valZ);
+    }
+
+    /** Построение Пространственного чертежа */
+    function drawDimensional(valX, valY ,valZ) {
+        clearCanvas(drwDim);
+
         //Соединяющие точки
         var pointAxy = drwDim.createPoint(0, 0, valZ).drawPoint();
         var pointAxz = drwDim.createPoint(0, valY, 0).drawPoint();
@@ -58,21 +73,12 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         //Точка A
         var pointA = drwDim.createPoint(valX, valY, valZ).drawPoint('A');
         pointA.drawLine(pointAz).drawLine(pointAx).drawLine(pointAy);
-
-        $scope.valX = valX;
-        $scope.valY = valY;
-        $scope.valZ = valZ;
-
-        //Отображение значений ползунков
-        angularApply($scope);
-
-        //Построение Комплексного чертежа
-        drawComplex(valX, valY, valZ);
     }
 
     /** Построение Комплексного чертежа */
     function drawComplex(valX, valY ,valZ) {
         clearCanvas(drwCmplx); //TODO Ось координат для комплексного
+
         var pointA1 = drwCmplx.createPoint2D(valX, -valY).drawPoint('A1');
         var pointA2 = drwCmplx.createPoint2D(valX, valZ).drawPoint('A2');
         var pointA3 = drwCmplx.createPoint2D(-valY, valZ).drawPoint('A3');
@@ -87,5 +93,5 @@ app.controller('MyCtrl', function MyCtrl($scope) {
 
     //Start
     initSliders();
-    changeSlider();
+    repaintDrawing();
 });
