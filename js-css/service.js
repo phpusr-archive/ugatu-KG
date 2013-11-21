@@ -5,26 +5,31 @@
  */
 
 /** Очистка канвы */
-function clearCanvas(drw) {
+function clearCanvas(drw, type) {
     drw.clearCanvas();
 
     //Рисование осей
-    var y1 = drw.createPoint(0, -100, 0);
-    var y2 = drw.createPoint(0, 100, 0);
-    y1.drawLine(y2);
+    if (type == 'dim') {
+        var y1 = drw.createPoint(0, -100, 0);
+        var y2 = drw.createPoint(0, 100, 0);
+        y1.drawLine(y2);
+    }
     drw.drawLineXY(X0, MIN_Y, X0, MAX_Y); //TODO возможно стоит все координаты переделать в 3D
     drw.drawLineXY(MIN_X, Y0, MAX_X, Y0);
 
     //Заголовки осей
-    var size = 20;
-    drw.drawTextXY('X', MIN_X, Y0);
-    drw.drawTextXY('-X', MAX_X-size, Y0);
+    var size = 30;
+    var titles = {
+        dim: [{title: 'X', x: MIN_X, y: Y0}, {title: '-X', x: MAX_X-size, y: Y0},
+            {title: 'Z', x: X0, y: MIN_Y+size}, {title: '-Z', x: X0, y: MAX_Y-size},
+            {title: 'Y', x: MAX_X-size, y: MAX_Y-size}, {title: '-Y', x: MIN_X+size, y: MIN_Y+size}],
+        cmplx: [{title: 'X', x: MIN_X, y: Y0}, {title: 'Y1', x: MAX_X-size, y: Y0},
+            {title: 'Z', x: X0, y: MIN_Y+size}, {title: 'Y', x: X0, y: MAX_Y-size}]
+    };
 
-    drw.drawTextXY('Z', X0, MIN_Y+size);
-    drw.drawTextXY('-Z', X0, MAX_Y);
-
-    drw.drawTextXY('Y', MAX_X-size, MAX_Y-size);
-    drw.drawTextXY('-Y', MIN_X+size, MIN_Y+size);
+    $.each(titles[type], function() {
+        drw.drawTextXY(this.title, this.x, this.y);
+    });
 }
 
 /** Логирование координат Точки */

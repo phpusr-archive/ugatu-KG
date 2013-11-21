@@ -55,7 +55,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
 
     /** Построение Пространственного чертежа */
     function drawDimensional(valX, valY ,valZ) {
-        clearCanvas(drwDim);
+        clearCanvas(drwDim, 'dim');
 
         //Проекция точки A
         var pointAx = drwDim.createPoint(valX, 0, 0).drawPoint('Ax');
@@ -77,7 +77,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
 
     /** Построение Комплексного чертежа */
     function drawComplex(valX, valY ,valZ) {
-        clearCanvas(drwCmplx); //TODO Ось координат для комплексного
+        clearCanvas(drwCmplx, 'cmplx');
 
         var pointA1 = drwCmplx.createPoint2D(valX, -valY).drawPoint('A1');
         var pointA2 = drwCmplx.createPoint2D(valX, valZ).drawPoint('A2');
