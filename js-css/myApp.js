@@ -63,20 +63,20 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         drwDim.drawAxis();
 
         //Проекция точки A
-        var pointAx = drwDim.createPoint(valX, 0, 0).drawPoint('Ax');
-        var pointAy = drwDim.createPoint(0, valY, 0).drawPoint('Ay');
-        var pointAz = drwDim.createPoint(0, 0, valZ).drawPoint('Az');
+        var pointAx = drwDim.createPoint3D(valX, 0, 0).drawPoint('Ax');
+        var pointAy = drwDim.createPoint3D(0, valY, 0).drawPoint('Ay');
+        var pointAz = drwDim.createPoint3D(0, 0, valZ).drawPoint('Az');
 
-        var pointA1 = drwDim.createPoint(valX, valY, 0).drawPoint('A1');
-        var pointA2 = drwDim.createPoint(valX, 0, valZ).drawPoint('A2');
-        var pointA3 = drwDim.createPoint(0, valY, valZ).drawPoint('A3');
+        var pointA1 = drwDim.createPoint3D(valX, valY, 0).drawPoint('A1');
+        var pointA2 = drwDim.createPoint3D(valX, 0, valZ).drawPoint('A2');
+        var pointA3 = drwDim.createPoint3D(0, valY, valZ).drawPoint('A3');
 
         pointAz.drawLine(pointA3).drawLine(pointA2);
         pointAy.drawLine(pointA3).drawLine(pointA1);
         pointAx.drawLine(pointA2).drawLine(pointA1);
 
         //Точка A
-        var pointA = drwDim.createPoint(valX, valY, valZ).drawPoint('A', 'red');
+        var pointA = drwDim.createPoint3D(valX, valY, valZ).drawPoint('A', 'red');
         pointA.drawLine(pointA1).drawLine(pointA2).drawLine(pointA3);
     }
 

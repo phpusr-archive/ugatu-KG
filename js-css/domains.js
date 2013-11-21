@@ -37,7 +37,7 @@ function Drawing(canvas, type) {
     var _self = this;
 
     /** Создание точки */
-    this.createPoint = function(x3D, y3D, z3D) {
+    this.createPoint3D = function(x3D, y3D, z3D) {
         var x = getX(x3D, y3D);
         var y = getY(z3D, y3D);
 
@@ -103,8 +103,8 @@ function Drawing(canvas, type) {
 
         //Рисование осей
         if (type == 'dim') {
-            var y1 = this.createPoint(0, -100, 0);
-            var y2 = this.createPoint(0, 100, 0);
+            var y1 = this.createPoint3D(0, -100, 0);
+            var y2 = this.createPoint3D(0, 100, 0);
             y1.drawLine(y2);
         }
         this.drawLineXY(X0, MIN_Y, X0, MAX_Y);
