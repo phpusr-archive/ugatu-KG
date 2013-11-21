@@ -76,7 +76,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         pointAx.drawLine(pointA2).drawLine(pointA1);
 
         //Точка A
-        var pointA = drwDim.createPoint(valX, valY, valZ).drawPoint('A');
+        var pointA = drwDim.createPoint(valX, valY, valZ).drawPoint('A', 'red');
         pointA.drawLine(pointA1).drawLine(pointA2).drawLine(pointA3);
     }
 

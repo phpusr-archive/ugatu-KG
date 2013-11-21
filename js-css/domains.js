@@ -8,15 +8,15 @@ function Point(drawing, x, y) {
     this.y = y;
 
     /** Рисование точки */
-    this.drawPoint = function(pointName) {
-        drawing.drawCircle(this.x, this.y, 5);
-        if (pointName) this.drawText(pointName);
+    this.drawPoint = function(pointName, color) {
+        drawing.drawCircle(this.x, this.y, 5, color);
+        if (pointName) this.drawText(pointName, color);
 
         return this;
     };
     /** Рисование текста */
-    this.drawText = function (text) {
-        drawing.drawTextXY(text, this.x, this.y);
+    this.drawText = function (text, color) {
+        drawing.drawTextXY(text, this.x, this.y, color);
 
         return this;
     };
@@ -68,9 +68,9 @@ function Drawing(canvas, type) {
     }
 
     /** Рисование текста */
-    this.drawTextXY = function(text, x, y) {
-        canvas.fillStyle = "#00F"; //TODO подумать над цветом заливки
-        canvas.font = "normal 15pt Arial";
+    this.drawTextXY = function(text, x, y, color) {
+        canvas.fillStyle = color ? color : 'green';
+        canvas.font = 'normal 15pt Arial';
         canvas.fillText(text, x, y);
     };
 
@@ -84,7 +84,8 @@ function Drawing(canvas, type) {
     };
 
     /** Рисование окружности */
-    this.drawCircle = function(x, y, radius) {
+    this.drawCircle = function(x, y, radius, color) {
+        canvas.fillStyle = color ? color : 'blue';
         canvas.beginPath();
         canvas.arc(x, y, radius, 0, Math.PI*2, false);
         canvas.closePath();
@@ -106,7 +107,7 @@ function Drawing(canvas, type) {
             var y2 = this.createPoint(0, 100, 0);
             y1.drawLine(y2);
         }
-        this.drawLineXY(X0, MIN_Y, X0, MAX_Y); //TODO возможно стоит все координаты переделать в 3D
+        this.drawLineXY(X0, MIN_Y, X0, MAX_Y);
         this.drawLineXY(MIN_X, Y0, MAX_X, Y0);
 
         //Заголовки осей
@@ -120,7 +121,7 @@ function Drawing(canvas, type) {
         };
 
         $.each(titles[type], function(index, value) {
-            _self.drawTextXY(value.title, value.x, value.y);
+            _self.drawTextXY(value.title, value.x, value.y, 'blue');
         });
     };
 
