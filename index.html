@@ -17,26 +17,25 @@
     <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="js-css/style.css" />
 
-
-    <script type="text/javascript">
-
-    </script>
 </head>
 <body ng-controller="MyCtrl">
 
-    <div style="width: 1050px; margin: 20px auto;"> <!--TODO установка ширины в одном месте-->
-        <div style="float: left;">
-            <canvas style="border: 1px solid #c6c6c6" id="canvasDimensional" width="500" height="500">{{notSupport}}</canvas>
-        </div>
-        <div style="float: right;">
-            <canvas style="border: 1px solid #c6c6c6" id="canvasComplex" width="500" height="500">{{notSupport}}</canvas>
+    <div id="drawBlock">
+
+        <div class="left">
+            <canvas id="canvasDimensional">{{notSupport}}</canvas>
         </div>
 
-        <div style="width: 500px; margin: 0 auto; padding-top: 15px; clear: left;">
+        <div class="right">
+            <canvas id="canvasComplex">{{notSupport}}</canvas>
+        </div>
+
+        <div id="sliderBlock">
             X = {{valX}} : <div id="sliderX" class="slider"></div>
             Y = {{valY}} : <div id="sliderY" class="slider"></div>
             Z = {{valZ}} : <div id="sliderZ" class="slider"></div>
         </div>
+
     </div>
 
 </body>

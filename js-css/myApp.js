@@ -6,11 +6,13 @@ var app = angular.module('myApp', ['ngSanitize']);
 app.controller('MyCtrl', function MyCtrl($scope) {
     $scope.notSupport = 'Браузер не поддерживает Canvas';
     //Канва
-    var cnvDim = document.getElementById("canvasDimensional").getContext("2d");
-    var cnvCmplx = document.getElementById("canvasComplex").getContext("2d");
+    var cnvDim = document.getElementById('canvasDimensional').getContext("2d");
+    var cnvCmplx = document.getElementById('canvasComplex').getContext("2d");
 
-    var drwDim = new Drawing(cnvDim, 'dim');
-    var drwCmplx = new Drawing(cnvCmplx, 'cmplx');
+    $('#canvasDimensional').attr('width', MAX_X).attr('height', MAX_Y);
+    $('#canvasComplex').attr('width', MAX_X).attr('height', MAX_Y);
+    $('#drawBlock').css('width', BLOCK_WIDTH);
+    $('#sliderBlock').css('width', SLIDER_WIDTH);
 
     /** Инициализация слайдеров (III-октант) */
     function initSliders() {
@@ -55,6 +57,8 @@ app.controller('MyCtrl', function MyCtrl($scope) {
 
     /** Построение Пространственного чертежа */
     function drawDimensional(valX, valY ,valZ) {
+        var drwDim = new Drawing(cnvDim, 'dim');
+
         //Очистка канвы и построение осей
         drwDim.drawAxis();
 
@@ -78,6 +82,8 @@ app.controller('MyCtrl', function MyCtrl($scope) {
 
     /** Построение Комплексного чертежа */
     function drawComplex(valX, valY ,valZ) {
+        var drwCmplx = new Drawing(cnvCmplx, 'cmplx');
+
         //Очистка канвы и построение осей
         drwCmplx.drawAxis();
 

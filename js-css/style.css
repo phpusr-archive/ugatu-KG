@@ -1,4 +1,22 @@
+#drawBlock {
+    margin: 20px auto;
+}
+
+canvas {
+    border: 1px solid #c6c6c6;
+}
+
 div.slider {
     width: 300px;
     margin-top: 10px;
 }
+
+#sliderBlock {
+    margin: 0 auto;
+    padding-top: 20px;
+    clear: left;
+}
+
+div.left { float: left; }
+
+div.right { float: right; }

@@ -32,7 +32,8 @@ function Point(drawing, x, y) {
  * Класс: Drawing
  */
 function Drawing(canvas, type) {
-    var alpha = 45;
+    var SCALE = 20;
+    var ALPHA = 45;
     var _self = this;
 
     /** Создание точки */
@@ -53,15 +54,15 @@ function Drawing(canvas, type) {
 
     /** X - координата в 2D */
     function getX(x3D, y3D) {
-        var v1 = X0 - (x3D - Math.round(y3D * Math.cos(alpha))) * SCALE; //Криво по Y
-        var v2 = X0 - Math.round((x3D - y3D * Math.cos(alpha)) * SCALE); //Нормально по Y
+        var v1 = X0 - (x3D - Math.round(y3D * Math.cos(ALPHA))) * SCALE; //Криво по Y
+        var v2 = X0 - Math.round((x3D - y3D * Math.cos(ALPHA)) * SCALE); //Нормально по Y
 
         return v2;
     }
     /** Y - координата в 2D */
     function getY(z3D, y3D) {
-        var v1 = Y0 - (z3D - Math.round(y3D * Math.sin(alpha))) * SCALE;
-        var v2 = Y0 - Math.round((z3D - y3D * Math.sin(alpha)) * SCALE);
+        var v1 = Y0 - (z3D - Math.round(y3D * Math.sin(ALPHA))) * SCALE;
+        var v2 = Y0 - Math.round((z3D - y3D * Math.sin(ALPHA)) * SCALE);
 
         return v2;
     }
