@@ -4,7 +4,10 @@
 
 var app = angular.module('myApp', ['ngSanitize']);
 app.controller('MyCtrl', function MyCtrl($scope) {
+    $scope.subject = 'КГ';
+    $scope.lab = 'Лаба 1 (Точка в 3-D пространстве)';
     $scope.notSupport = 'Браузер не поддерживает Canvas';
+
     //Канва
     var cnvDim = document.getElementById('canvasDimensional').getContext("2d");
     var cnvCmplx = document.getElementById('canvasComplex').getContext("2d");

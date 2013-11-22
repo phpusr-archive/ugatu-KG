@@ -1,3 +1,7 @@
+div.content {
+    margin: 20px;
+}
+
 #drawBlock {
     margin: 20px auto;
 }

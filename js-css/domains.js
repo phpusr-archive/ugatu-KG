@@ -115,7 +115,7 @@ function Drawing(canvas, type) {
         var titles = {
             dim: [{title: 'X', x: MIN_X, y: Y0}, {title: '-X', x: MAX_X-size, y: Y0},
                 {title: 'Z', x: X0, y: MIN_Y+size}, {title: '-Z', x: X0, y: MAX_Y-size},
-                {title: 'Y', x: MAX_X-size, y: MAX_Y-size}, {title: '-Y', x: MIN_X+size, y: MIN_Y+size}],
+                {title: 'Y', x: MAX_X-size*3, y: MAX_Y-size}, {title: '-Y', x: MIN_X+size*2, y: MIN_Y+size}],
             cmplx: [{title: 'X', x: MIN_X, y: Y0}, {title: 'Y1', x: MAX_X-size, y: Y0},
                 {title: 'Z', x: X0, y: MIN_Y+size}, {title: 'Y', x: X0, y: MAX_Y-size}]
         };
