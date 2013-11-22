@@ -21,8 +21,8 @@ function Point(drawing, x, y) {
         return this;
     };
     /** Рисование линии */
-    this.drawLine = function (pointTo) {
-        drawing.drawLineXY(this.x, this.y, pointTo.x, pointTo.y);
+    this.drawLine = function (pointTo, color) {
+        drawing.drawLineXY(this.x, this.y, pointTo.x, pointTo.y, color);
 
         return this;
     };
@@ -32,7 +32,6 @@ function Point(drawing, x, y) {
  * Класс: Drawing
  */
 function Drawing(canvas, type) {
-    var SCALE = 20;
     var ALPHA = 45;
     var _self = this;
 
@@ -69,23 +68,24 @@ function Drawing(canvas, type) {
 
     /** Рисование текста */
     this.drawTextXY = function(text, x, y, color) {
-        canvas.fillStyle = color ? color : 'green';
+        canvas.fillStyle = color ? color : COLOR_TEXT;
         canvas.font = 'normal 15pt Arial';
         canvas.fillText(text, x, y);
     };
 
     /** Рисование линии */
-    this.drawLineXY = function(x1, y1, x2, y2) {
+    this.drawLineXY = function(x1, y1, x2, y2, color) {
         canvas.beginPath();
         canvas.moveTo(x1, y1);
         canvas.lineTo(x2, y2);
         canvas.lineWidth = 2;
+        canvas.strokeStyle = color ? color : COLOR_LINE;
         canvas.stroke();
     };
 
     /** Рисование окружности */
     this.drawCircle = function(x, y, radius, color) {
-        canvas.fillStyle = color ? color : 'blue';
+        canvas.fillStyle = color ? color : COLOR_POINT;
         canvas.beginPath();
         canvas.arc(x, y, radius, 0, Math.PI*2, false);
         canvas.closePath();
@@ -105,10 +105,10 @@ function Drawing(canvas, type) {
         if (type == 'dim') {
             var y1 = this.createPoint3D(0, -100, 0);
             var y2 = this.createPoint3D(0, 100, 0);
-            y1.drawLine(y2);
+            y1.drawLine(y2, COLOR_AXIS);
         }
-        this.drawLineXY(X0, MIN_Y, X0, MAX_Y);
-        this.drawLineXY(MIN_X, Y0, MAX_X, Y0);
+        this.drawLineXY(X0, MIN_Y, X0, MAX_Y, COLOR_AXIS);
+        this.drawLineXY(MIN_X, Y0, MAX_X, Y0, COLOR_AXIS);
 
         //Заголовки осей
         var size = 30;
@@ -121,7 +121,7 @@ function Drawing(canvas, type) {
         };
 
         $.each(titles[type], function(index, value) {
-            _self.drawTextXY(value.title, value.x, value.y, 'blue');
+            _self.drawTextXY(value.title, value.x, value.y, COLOR_AXIS_TITLE);
         });
     };
 

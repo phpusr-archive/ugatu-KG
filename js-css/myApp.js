@@ -63,6 +63,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         drwDim.drawAxis();
 
         //Проекция точки A
+        var point0 = drwDim.createPoint3D(0, 0, 0).drawPoint();
         var pointAx = drwDim.createPoint3D(valX, 0, 0).drawPoint('Ax');
         var pointAy = drwDim.createPoint3D(0, valY, 0).drawPoint('Ay');
         var pointAz = drwDim.createPoint3D(0, 0, valZ).drawPoint('Az');
@@ -71,12 +72,13 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         var pointA2 = drwDim.createPoint3D(valX, 0, valZ).drawPoint('A2');
         var pointA3 = drwDim.createPoint3D(0, valY, valZ).drawPoint('A3');
 
+        point0.drawLine(pointAy).drawLine(pointAz).drawLine(pointAx);
         pointAz.drawLine(pointA3).drawLine(pointA2);
         pointAy.drawLine(pointA3).drawLine(pointA1);
         pointAx.drawLine(pointA2).drawLine(pointA1);
 
         //Точка A
-        var pointA = drwDim.createPoint3D(valX, valY, valZ).drawPoint('A', 'red');
+        var pointA = drwDim.createPoint3D(valX, valY, valZ).drawPoint('A', COLOR_POINT_A);
         pointA.drawLine(pointA1).drawLine(pointA2).drawLine(pointA3);
     }
 
