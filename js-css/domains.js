@@ -35,7 +35,7 @@ function Drawing(canvas, type) {
     var ALPHA = 45;
     var _self = this;
 
-    /** Создание точки */
+    /** Создание 3D точки */
     this.createPoint3D = function(x3D, y3D, z3D) {
         var x = getX(x3D, y3D);
         var y = getY(z3D, y3D);
