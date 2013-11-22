@@ -17,7 +17,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     $('#drawBlock').css('width', BLOCK_WIDTH);
     $('#sliderBlock').css('width', SLIDER_WIDTH);
 
-    /** Инициализация слайдеров (III-октант) */
+    /** Инициализация слайдеров */
     function initSliders() {
         $('#sliderX').slider({
             range: 'max', min: -10, max: 10, value: -7,
