@@ -10,6 +10,17 @@ canvas {
     border: 1px solid #c6c6c6;
 }
 
+#control-block {
+    clear: left;
+    padding-top: 20px;
+}
+
+#points-block {
+    padding: 65px 0 0 20px;
+    width: 300px;
+    float: left;
+}
+
 div.slider {
     width: 300px;
     margin-top: 10px;
@@ -17,8 +28,7 @@ div.slider {
 
 #sliderBlock {
     margin: 0 auto;
-    padding-top: 20px;
-    clear: left;
+    float: left;
 }
 
 div.left { float: left; }
