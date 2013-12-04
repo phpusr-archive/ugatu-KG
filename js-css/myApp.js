@@ -18,6 +18,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     $('#sliderBlock').css('width', SLIDER_WIDTH);
 
     var drwDim = new Drawing(cnvDim, 'dim');
+    var drwCmplx = new Drawing(cnvCmplx, 'cmplx');
     var points = [
         {text: 'A', p: drwDim.createPoint3D(3,7,2)},
         {text: 'B', p: drwDim.createPoint3D(3,1,8)},
@@ -77,7 +78,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         //Построение Пространственного чертежа
         drawDimensional(valX, valY, valZ);
         //Построение Комплексного чертежа
-        //drawComplex(valX, valY, valZ);
+        drawComplex();
     }
 
     /** Построение Пространственного чертежа */
@@ -152,18 +153,24 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     }
 
     /** Построение Комплексного чертежа */
-    function drawComplex(valX, valY ,valZ) {
-        var drwCmplx = new Drawing(cnvCmplx, 'cmplx');
-
+    function drawComplex() {
         //Очистка канвы и построение осей
         drwCmplx.drawAxis();
 
-        var pointA1 = drwCmplx.createPoint2D(valX, -valY).drawPoint('A1');
-        var pointA2 = drwCmplx.createPoint2D(valX, valZ).drawPoint('A2');
-        var pointA3 = drwCmplx.createPoint2D(-valY, valZ).drawPoint('A3');
+        for (var i= 0; i<points.length; i++) {
+            drawComplexPoint(points[i]);
+        }
+    }
 
-        var pointAy = drwCmplx.createPoint2D(0, -valY).drawPoint('Ay');
-        var pointAy1 = drwCmplx.createPoint2D(-valY, 0).drawPoint('Ay1');
+    /** Построение Комплексного чертежа для точки */
+    function drawComplexPoint(point) {
+        var p = point.p;
+        var pointA1 = drwCmplx.createPoint2D(p.x3D, -p.y3D).drawPoint(point.text + '1');
+        var pointA2 = drwCmplx.createPoint2D(p.x3D, p.z3D).drawPoint(point.text + '2');
+        var pointA3 = drwCmplx.createPoint2D(-p.y3D, p.z3D).drawPoint(point.text + '3');
+
+        var pointAy = drwCmplx.createPoint2D(0, -p.y3D).drawPoint(point.text + 'y');
+        var pointAy1 = drwCmplx.createPoint2D(-p.y3D, 0).drawPoint(point.text + 'y1');
 
         pointAy.drawLine(pointAy1).drawLine(pointA1);
         pointA3.drawLine(pointAy1).drawLine(pointA2);
