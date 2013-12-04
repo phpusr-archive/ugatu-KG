@@ -17,6 +17,18 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     $('#drawBlock').css('width', BLOCK_WIDTH);
     $('#sliderBlock').css('width', SLIDER_WIDTH);
 
+    var drwDim = new Drawing(cnvDim, 'dim');
+    var points = [
+        {text: 'A', p: drwDim.createPoint3D(0,0,0)},
+        {text: 'B', p: drwDim.createPoint3D(0,0,0)},
+        {text: 'C', p: drwDim.createPoint3D(0,0,0)},
+        {text: 'M', p: drwDim.createPoint3D(0,0,0)},
+        {text: 'N', p: drwDim.createPoint3D(0,0,0)}
+    ];
+    $scope.points = points;
+    var current = {point: 0};
+    $scope.current = current;
+
     /** Инициализация слайдеров */
     function initSliders() {
         $('#sliderX').slider({
@@ -39,6 +51,16 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         });
     }
 
+    $scope.changePoint = function() {
+        console.log('point: ', current.point);
+        var point = points[current.point].p;
+
+        $('#sliderX').slider('value', point.x3D);
+        $('#sliderY').slider('value', point.y3D);
+        $('#sliderZ').slider('value', point.z3D);
+        repaintDrawing();
+    };
+
     /** Перерисовка чертежей */
     function repaintDrawing(valX, valY ,valZ) {
 
@@ -55,34 +77,21 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         //Построение Пространственного чертежа
         drawDimensional(valX, valY, valZ);
         //Построение Комплексного чертежа
-        drawComplex(valX, valY, valZ);
+        //drawComplex(valX, valY, valZ);
     }
 
     /** Построение Пространственного чертежа */
     function drawDimensional(valX, valY ,valZ) {
-        var drwDim = new Drawing(cnvDim, 'dim');
 
         //Очистка канвы и построение осей
         drwDim.drawAxis();
 
-        //Проекция точки A
-        var point0 = drwDim.createPoint3D(0, 0, 0).drawPoint();
-        var pointAx = drwDim.createPoint3D(valX, 0, 0).drawPoint('Ax');
-        var pointAy = drwDim.createPoint3D(0, valY, 0).drawPoint('Ay');
-        var pointAz = drwDim.createPoint3D(0, 0, valZ).drawPoint('Az');
+        points[current.point].p = drwDim.createPoint3D(valX, valY, valZ);
 
-        var pointA1 = drwDim.createPoint3D(valX, valY, 0).drawPoint('A1');
-        var pointA2 = drwDim.createPoint3D(valX, 0, valZ).drawPoint('A2');
-        var pointA3 = drwDim.createPoint3D(0, valY, valZ).drawPoint('A3');
-
-        point0.drawLine(pointAy).drawLine(pointAz).drawLine(pointAx);
-        pointAz.drawLine(pointA3).drawLine(pointA2);
-        pointAy.drawLine(pointA3).drawLine(pointA1);
-        pointAx.drawLine(pointA2).drawLine(pointA1);
-
-        //Точка A
-        var pointA = drwDim.createPoint3D(valX, valY, valZ).drawPoint('A', COLOR_POINT_A);
-        pointA.drawLine(pointA1).drawLine(pointA2).drawLine(pointA3);
+        for (var i=0; i<points.length; i++) {
+            var point = points[i];
+            point.p.drawPoint(point.text);
+        }
     }
 
     /** Построение Комплексного чертежа */

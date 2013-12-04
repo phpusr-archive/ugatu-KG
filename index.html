@@ -43,6 +43,13 @@
             Z = {{valZ}} : <div id="sliderZ" class="slider"></div>
         </div>
 
+        <div>
+            <span ng-repeat="p in points">
+                <input type="radio" name="point" ng-model="current.point" value="{{$index}}" ng-change="changePoint()" />
+                {{p.text}}&nbsp;&nbsp;&nbsp;
+            </span>
+        </div>
+
     </div>
 
 </div>

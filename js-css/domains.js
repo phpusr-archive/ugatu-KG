@@ -3,9 +3,13 @@
 /**
  * Класс: Точка
  */
-function Point(drawing, x, y) {
+function Point(drawing, x, y, x3D, y3D, z3D) {
     this.x = x;
     this.y = y;
+
+    this.x3D = x3D;
+    this.y3D = y3D;
+    this.z3D = z3D;
 
     /** Рисование точки */
     this.drawPoint = function(pointName, color) {
@@ -40,7 +44,7 @@ function Drawing(canvas, type) {
         var x = getX(x3D, y3D);
         var y = getY(z3D, y3D);
 
-        return new Point(this, x, y);
+        return new Point(this, x, y, x3D, y3D, z3D);
     };
 
     /** Создание 2D точки */
