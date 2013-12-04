@@ -49,7 +49,7 @@ function Point(drawing, x, y, x3D, y3D, z3D) {
         pointAx.drawLine(pointA2).drawLine(pointA1);
 
         //Точка A
-        var pointA = drawing.createPoint3D(this.x3D, this.y3D, this.z3D).drawPoint(text, COLOR_POINT_A);
+        var pointA = drawing.createPoint3D(this.x3D, this.y3D, this.z3D).drawPoint(text, COLOR_HIGHLIGHT);
         pointA.drawLine(pointA1).drawLine(pointA2).drawLine(pointA3);
     };
 
