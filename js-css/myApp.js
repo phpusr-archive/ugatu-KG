@@ -5,7 +5,7 @@
 var app = angular.module('myApp', ['ngSanitize']);
 app.controller('MyCtrl', function MyCtrl($scope) {
     $scope.subject = 'КГ';
-    $scope.lab = 'Лаба 1 (Точка в 3-D пространстве)';
+    $scope.lab = 'Лаба 2 (Пересечение плоскости и точки)';
     $scope.notSupport = 'Браузер не поддерживает Canvas';
 
     //Канва
@@ -129,13 +129,13 @@ app.controller('MyCtrl', function MyCtrl($scope) {
 
         var visibleN;
         var tmpN = A*pointN.x3D + B*pointN.y3D + C*pointN.z3D + D;
-        var delta = 0.1; //TODO
-        var tmp = (A==0 && B==0 && C==0) || (A*(pointM.x3D-pointN.x3D) + B*(pointM.y3D-pointN.y3D) + C*(pointM.z3D-pointN.z3D))==0 || (Math.abs(B) < delta);
+        var delta = 0.01; //TODO какое значение поставить?
+        var tmpMN = (A==0 && B==0 && C==0) || (A*(pointM.x3D-pointN.x3D) + B*(pointM.y3D-pointN.y3D) + C*(pointM.z3D-pointN.z3D))==0 || (Math.abs(B) < delta);
         if (tmpN > 0) {
             visibleN = true;
         } else if (tmpN < 0) {
             visibleN = false;
-        } else if (tmp) {
+        } else if (tmpMN) {
             visibleM = true;
             visibleN = true;
         }
