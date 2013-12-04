@@ -87,19 +87,11 @@ app.controller('MyCtrl', function MyCtrl($scope) {
 
         points[current.point].p = drwDim.createPoint3D(valX, valY, valZ);
 
-        for (var i=0; i<points.length; i++) {
-            var point = points[i];
-            point.p.drawPoint(point.text);
-        }
         var pointA = points[0].p;
         var pointB = points[1].p;
         var pointC = points[2].p;
-        pointA.drawLine(pointB).drawLine(pointC);
-        pointB.drawLine(pointC);
-
         var pointM = points[3].p;
         var pointN = points[4].p;
-        pointM.drawLine(pointN);
 
         //Вычисление коэффициентов плоскости
         var A = (pointA.y3D-pointB.y3D) * (pointA.z3D+pointB.z3D) + (pointB.y3D-pointC.y3D) * (pointB.z3D+pointC.z3D) + (pointC.y3D-pointA.y3D) * (pointC.z3D+pointA.z3D);
@@ -110,7 +102,6 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         //Нахождение точки пересечения плоскости с прямой
         if ((A*(pointM.x3D - pointN.x3D) + B*(pointM.y3D - pointN.y3D) + C*(pointM.z3D - pointN.z3D)) != 0) {
             var t = (A*pointM.x3D + B*pointM.y3D + C*pointM.z3D + D) / (A*(pointM.x3D-pointN.x3D) + B*(pointM.y3D-pointN.y3D) + C*(pointM.z3D-pointN.z3D));
-            console.log('T', t);
 
             if (t>=0 && t<=1) {
                 var xT = pointM.x3D + (pointN.x3D-pointM.x3D)*t;
@@ -119,7 +110,6 @@ app.controller('MyCtrl', function MyCtrl($scope) {
 
                 var pointT = drwDim.createPoint3D(xT, yT, zT);
                 pointT.drawPoint('T');
-                console.log(pointT);
             }
         }
 
@@ -148,6 +138,17 @@ app.controller('MyCtrl', function MyCtrl($scope) {
             visibleM = true;
             visibleN = true;
         }
+
+        //Построение чертежа
+        pointA.drawPoint('A');
+        pointB.drawPoint('B');
+        pointC.drawPoint('C');
+        pointA.drawLine(pointB).drawLine(pointC);
+        pointB.drawLine(pointC);
+
+        if (visibleM) pointM.drawPoint('M');
+        if (visibleN) pointN.drawPoint('N');
+        pointM.drawLine(pointN);
     }
 
     /** Построение Комплексного чертежа */
