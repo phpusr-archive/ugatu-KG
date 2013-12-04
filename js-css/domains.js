@@ -51,7 +51,21 @@ function Point(drawing, x, y, x3D, y3D, z3D) {
         //Точка A
         var pointA = drawing.createPoint3D(this.x3D, this.y3D, this.z3D).drawPoint(text, COLOR_POINT_A);
         pointA.drawLine(pointA1).drawLine(pointA2).drawLine(pointA3);
-    }
+    };
+
+    /** Рисование комплексного чертежа точки */
+    this.drawComplex = function(drawing, text) {
+        var pointA1 = drawing.createPoint2D(this.x3D, -this.y3D).drawPoint(text + '1');
+        var pointA2 = drawing.createPoint2D(this.x3D, this.z3D).drawPoint(text + '2');
+        var pointA3 = drawing.createPoint2D(-this.y3D, this.z3D).drawPoint(text + '3');
+
+        var pointAy = drawing.createPoint2D(0, -this.y3D).drawPoint(text + 'y');
+        var pointAy1 = drawing.createPoint2D(-this.y3D, 0).drawPoint(text + 'y1');
+
+        pointAy.drawLine(pointAy1).drawLine(pointA1);
+        pointA3.drawLine(pointAy1).drawLine(pointA2);
+        pointA1.drawLine(pointA2);
+    };
 }
 
 /**

@@ -158,23 +158,8 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         drwCmplx.drawAxis();
 
         for (var i= 0; i<points.length; i++) {
-            drawComplexPoint(points[i]);
+            points[i].p.drawComplex(drwCmplx, points[i].text);
         }
-    }
-
-    /** Построение Комплексного чертежа для точки */
-    function drawComplexPoint(point) {
-        var p = point.p;
-        var pointA1 = drwCmplx.createPoint2D(p.x3D, -p.y3D).drawPoint(point.text + '1');
-        var pointA2 = drwCmplx.createPoint2D(p.x3D, p.z3D).drawPoint(point.text + '2');
-        var pointA3 = drwCmplx.createPoint2D(-p.y3D, p.z3D).drawPoint(point.text + '3');
-
-        var pointAy = drwCmplx.createPoint2D(0, -p.y3D).drawPoint(point.text + 'y');
-        var pointAy1 = drwCmplx.createPoint2D(-p.y3D, 0).drawPoint(point.text + 'y1');
-
-        pointAy.drawLine(pointAy1).drawLine(pointA1);
-        pointA3.drawLine(pointAy1).drawLine(pointA2);
-        pointA1.drawLine(pointA2);
     }
 
     //Start
