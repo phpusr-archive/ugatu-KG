@@ -15,7 +15,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     $('#canvasDimensional').attr('width', MAX_X).attr('height', MAX_Y);
     $('#canvasComplex').attr('width', MAX_X).attr('height', MAX_Y);
     $('#drawBlock').css('width', BLOCK_WIDTH);
-    $('#sliderBlock').css('width', SLIDER_WIDTH);
+    $('#slider-block').css('width', SLIDER_WIDTH);
 
     var drwDim = new Drawing(cnvDim, 'dim');
     var drwCmplx = new Drawing(cnvCmplx, 'cmplx');
