@@ -19,11 +19,11 @@ app.controller('MyCtrl', function MyCtrl($scope) {
 
     var drwDim = new Drawing(cnvDim, 'dim');
     var points = [
-        {text: 'A', p: drwDim.createPoint3D(1,-2,3)},
-        {text: 'B', p: drwDim.createPoint3D(5,-1,3)},
-        {text: 'C', p: drwDim.createPoint3D(8,3,-4)},
-        {text: 'M', p: drwDim.createPoint3D(0,0,0)},
-        {text: 'N', p: drwDim.createPoint3D(1,-3,4)}
+        {text: 'A', p: drwDim.createPoint3D(3,7,2)},
+        {text: 'B', p: drwDim.createPoint3D(3,1,8)},
+        {text: 'C', p: drwDim.createPoint3D(10,6,9)},
+        {text: 'M', p: drwDim.createPoint3D(9,2,1)},
+        {text: 'N', p: drwDim.createPoint3D(1,3,4)}
     ];
     $scope.points = points;
     var current = {point: 0};
@@ -32,19 +32,19 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     /** Инициализация слайдеров */
     function initSliders() {
         $('#sliderX').slider({
-            range: 'max', min: -10, max: 10, value: 0,
+            range: 'max', min: 0, max: 10, value: 0,
             slide: function(event, ui) {
                 repaintDrawing(ui.value, null, null);
             }
         });
         $('#sliderY').slider({
-            range: 'max', min: -10, max: 10, value: 0,
+            range: 'max', min: 0, max: 10, value: 0,
             slide: function(event, ui) {
                 repaintDrawing(null, ui.value, null);
             }
         });
         $('#sliderZ').slider({
-            range: 'max', min: -10, max: 10, value: 0,
+            range: 'max', min: 0, max: 10, value: 0,
             slide: function(event, ui) {
                 repaintDrawing(null, null, ui.value);
             }
@@ -94,6 +94,8 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         points[0].p.drawLine(points[1].p).drawLine(points[2].p);
         points[1].p.drawLine(points[2].p);
         points[3].p.drawLine(points[4].p);
+
+
     }
 
     /** Построение Комплексного чертежа */
