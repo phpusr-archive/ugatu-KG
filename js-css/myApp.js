@@ -110,7 +110,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
                 var zT = pointM.z3D + (pointN.z3D-pointM.z3D)*t;
 
                 var pointT = drwDim.createPoint3D(xT, yT, zT);
-                pointT.drawPoint('T');
+                pointT.drawPoint('T', COLOR_POINT_A);
             }
         }
 
@@ -141,15 +141,15 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         }
 
         //Построение чертежа
-        pointA.drawPoint('A');
-        pointB.drawPoint('B');
-        pointC.drawPoint('C');
-        pointA.drawLine(pointB).drawLine(pointC);
-        pointB.drawLine(pointC);
+        for (var i= 0; i<points.length; i++) {
+            points[i].p.drawProjection(points[i].text)
+        }
+        pointA.drawLine(pointB, COLOR_POINT_A).drawLine(pointC, COLOR_POINT_A);
+        pointB.drawLine(pointC, COLOR_POINT_A);
 
         if (visibleM) pointM.drawPoint('M');
         if (visibleN) pointN.drawPoint('N');
-        pointM.drawLine(pointN);
+        pointM.drawLine(pointN, COLOR_POINT_A);
     }
 
     /** Построение Комплексного чертежа */

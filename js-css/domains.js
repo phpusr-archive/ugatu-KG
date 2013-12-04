@@ -30,6 +30,28 @@ function Point(drawing, x, y, x3D, y3D, z3D) {
 
         return this;
     };
+
+    /** Рисование проекции точки */
+    this.drawProjection = function(text) {
+        //Проекция точки A
+        var point0 = drawing.createPoint3D(0, 0, 0).drawPoint();
+        var pointAx = drawing.createPoint3D(this.x3D, 0, 0).drawPoint(text + 'x');
+        var pointAy = drawing.createPoint3D(0, this.y3D, 0).drawPoint(text + 'y');
+        var pointAz = drawing.createPoint3D(0, 0, this.z3D).drawPoint(text + 'z');
+
+        var pointA1 = drawing.createPoint3D(this.x3D, this.y3D, 0).drawPoint(text + '1');
+        var pointA2 = drawing.createPoint3D(this.x3D, 0, this.z3D).drawPoint(text + '2');
+        var pointA3 = drawing.createPoint3D(0, this.y3D, this.z3D).drawPoint(text + '3');
+
+        point0.drawLine(pointAy).drawLine(pointAz).drawLine(pointAx);
+        pointAz.drawLine(pointA3).drawLine(pointA2);
+        pointAy.drawLine(pointA3).drawLine(pointA1);
+        pointAx.drawLine(pointA2).drawLine(pointA1);
+
+        //Точка A
+        var pointA = drawing.createPoint3D(this.x3D, this.y3D, this.z3D).drawPoint(text, COLOR_POINT_A);
+        pointA.drawLine(pointA1).drawLine(pointA2).drawLine(pointA3);
+    }
 }
 
 /**
