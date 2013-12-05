@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html ng-app="myApp">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -40,10 +41,10 @@
         <div id="control-block">
 
             <div id="points-block">
-                <span ng-repeat="p in points">
+                <label ng-repeat="p in points">
                     <input type="radio" name="point" ng-model="current.point" value="{{$index}}" ng-change="changePoint()" />
                     {{p.text}}&nbsp;&nbsp;&nbsp;
-                </span>
+                </label>
             </div>
 
             <div id="slider-block">

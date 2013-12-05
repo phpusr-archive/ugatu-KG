@@ -53,7 +53,6 @@ app.controller('MyCtrl', function MyCtrl($scope) {
     }
 
     $scope.changePoint = function() {
-        console.log('point: ', current.point);
         var point = points[current.point].p;
 
         $('#sliderX').slider('value', point.x3D);

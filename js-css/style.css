@@ -20,6 +20,9 @@ canvas {
     width: 300px;
     float: left;
 }
+#points-block label {
+    display: inline;
+}
 
 div.slider {
     width: 300px;
