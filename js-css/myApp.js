@@ -80,6 +80,8 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         drawComplex();
     }
 
+    var pointT; //Точка T
+
     /** Построение Пространственного чертежа */
     function drawDimensional(valX, valY ,valZ) {
         //Очистка канвы и построение осей
@@ -92,6 +94,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         var pointC = points[2].p;
         var pointM = points[3].p;
         var pointN = points[4].p;
+        pointT = null;
 
         //Вычисление коэффициентов плоскости
         var A = (pointA.y3D-pointB.y3D) * (pointA.z3D+pointB.z3D) + (pointB.y3D-pointC.y3D) * (pointB.z3D+pointC.z3D) + (pointC.y3D-pointA.y3D) * (pointC.z3D+pointA.z3D);
@@ -108,7 +111,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
                 var yT = pointM.y3D + (pointN.y3D-pointM.y3D)*t;
                 var zT = pointM.z3D + (pointN.z3D-pointM.z3D)*t;
 
-                var pointT = drwDim.createPoint3D(xT, yT, zT);
+                pointT = drwDim.createPoint3D(xT, yT, zT);
                 pointT.drawPoint('T', COLOR_HIGHLIGHT);
             }
         }
@@ -159,6 +162,7 @@ app.controller('MyCtrl', function MyCtrl($scope) {
         for (var i= 0; i<points.length; i++) {
             points[i].p.drawComplex(drwCmplx, points[i].text);
         }
+        if (pointT) pointT.drawComplex(drwCmplx, 'T');
     }
 
     //Start
