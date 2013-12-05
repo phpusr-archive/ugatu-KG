@@ -1,0 +1,39 @@
+div.content {
+    margin: 20px;
+}
+
+#drawBlock {
+    margin: 20px auto;
+}
+
+canvas {
+    border: 1px solid #c6c6c6;
+}
+
+#control-block {
+    clear: left;
+    padding-top: 20px;
+}
+
+#points-block {
+    padding: 65px 0 0 20px;
+    width: 300px;
+    float: left;
+}
+#points-block label {
+    display: inline;
+}
+
+div.slider {
+    width: 300px;
+    margin-top: 10px;
+}
+
+#slider-block {
+    margin: 0 auto;
+    float: left;
+}
+
+div.left { float: left; }
+
+div.right { float: right; }
